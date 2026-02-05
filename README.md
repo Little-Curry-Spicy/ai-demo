@@ -45,6 +45,37 @@ langchain-monorepo/
 pnpm install
 ```
 
+## 文件类 Tool 示例（src/tools.ts）
+
+基于 **fs-extra** 的简单文件工具，支持创建目录、读文件、写文件、列目录，类似 Cursor 生成文件的能力。所有路径相对于**当前工作目录**（运行脚本时的目录）。
+
+### 运行
+
+```bash
+pnpm dev    # 监听并运行
+pnpm start  # 直接运行
+```
+
+### 工具说明
+
+| 工具 | 说明 | 参数 |
+|------|------|------|
+| `create_directory` | 创建目录（父目录不存在会一并创建） | `dirPath` 相对路径 |
+| `read_file` | 读取文件内容（UTF-8） | `filePath` 相对路径 |
+| `write_file` | 写入文件（目录不存在会先创建，可生成新文件） | `filePath`, `content` |
+| `list_directory` | 列出一层目录下的文件名 | `dirPath`，传 `.` 或空表示当前目录 |
+
+### 示例
+
+- 「列出当前目录」→ `list_directory`
+- 「读一下 src/tools.ts 的前 50 行」→ `read_file` 后模型总结
+- 「在 output 下建一个 hello.txt，内容写 Hello World」→ `create_directory` + `write_file` 或直接 `write_file`（会先建目录）
+- 「在 src 下生成一个 foo.ts，内容是 export const x = 1」→ `write_file`
+
+依赖：需先执行 `pnpm install`（含 fs-extra）。
+
+---
+
 ## 开发
 
 ### 同时启动前后端

@@ -1,12 +1,12 @@
+import "dotenv/config";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as readline from "node:readline";
 import { AIMessage, HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { ChatOpenAI } from '@langchain/openai';
-
+import { env } from "node:process";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 /** 单条问答记录 */
 interface QARecord {
     question: string;
@@ -34,7 +34,7 @@ let qaRecords = loadQARecords();
 
 const model = new ChatOpenAI({
     modelName: "deepseek-chat",
-    apiKey: "sk-d08d15ac6d0f4729929d63b063796d13",
+    apiKey: env.DEEPSEEK_API_KEY,
     configuration: {
         baseURL: "https://api.deepseek.com",
     },
