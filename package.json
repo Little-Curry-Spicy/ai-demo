@@ -5,14 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/tools.ts",
-    "start": "tsx src/tools.ts",
+    "dev": "tsx watch src/rag.ts",
+    "start": "tsx src/rag.ts",
     "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@langchain/classic": "^1.0.15",
     "@langchain/core": "^1.1.16",
     "@langchain/mcp-adapters": "^1.1.1",
     "@langchain/openai": "^1.2.3",
