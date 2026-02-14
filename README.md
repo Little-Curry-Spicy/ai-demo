@@ -21,6 +21,7 @@
 - `pnpm start`：运行 RAG 示例（`src/rag.ts`）
 - `pnpm dev`：监听并运行 RAG
 - `pnpm milvus`：运行 Zilliz/Milvus 日记本增删改查示例（`src/milvus.ts`）
+- `pnpm exec tsx src/langgraph-examples.ts`：运行 LangGraph API 示例（见下方）
 - `pnpm build`：TypeScript 编译
 
 ---
@@ -64,6 +65,24 @@ pnpm milvus
 - `deleteById(client, id)` / `deleteByIds(client, ids)`：按 id 删除
 
 集合名为 `diary`；向量由千问 `text-embedding-v3` 生成，与 RAG 示例一致。
+
+---
+
+## LangGraph 示例（`src/langgraph-examples.ts`）
+
+使用 **@langchain/langgraph** 的 Graph API：状态图、节点、边、条件边。
+
+- **示例 1**：线性图 —— `StateSchema`、`addNode`、`addEdge`、`START`/`END`、`compile`、`invoke`
+- **示例 2**：条件边 —— `addConditionalEdges`，根据 state 决定下一节点或结束
+- **示例 3**：带 LLM —— `MessagesValue`、节点内调用 `model.invoke`、按是否 tool_calls 路由
+
+运行：
+
+```bash
+pnpm exec tsx src/langgraph-examples.ts
+```
+
+需配置 `.env` 中的 `QIANWEN_API_KEY`（示例 3 会调 LLM）。
 
 ---
 
